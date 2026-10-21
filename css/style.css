@@ -1,0 +1,123 @@
+:root{
+    --main-color: #b1afaf;
+    --sec-color: rgba(255, 255, 255, 0.632);
+    --hover-color:#ffffff;
+}
+
+h1{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+html{
+    background: url(/assets/abstract-gray-background_1134661-13175.avif);
+    background-size: cover;
+}
+
+.nav-bar{
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px #777777 solid;
+}
+
+.nav-bar img{
+    width: 20%;
+}
+
+.hero{
+    padding: 10px;
+}
+
+.content{
+    display: flex;
+    flex-direction: row;
+}
+
+.content .side-pannel{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.side-pannel button{
+    background-color: var(--main-color);
+    margin: 2rem;
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+}
+.side-pannel{
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 0 15px 1px #3e3e3e;
+}
+
+button:hover{
+    transition: 0.3s;
+    background-color: var(--hover-color);
+}
+
+.content-wrapper{
+    text-align: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 15px 1px #777777;
+    border-radius: 30px;
+    margin: auto;
+    padding: 2rem;
+}
+
+.content-dashboard{
+    display: flex;
+    justify-content: space-between
+}
+
+.topsales{
+    background-color: var(--main-color);
+    margin: 3rem;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 15px 1px #626262;
+}
+
+.daily-revenue{
+    background-color: var(--main-color);
+    margin: 3rem;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 15px 1px #626262;
+}
+
+.business-health{
+    background-color: var(--main-color);
+    margin: 3rem;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 15px 1px #626262;
+}
+
+.content-sales{
+    background-color: var(--main-color);
+    margin: auto;
+    border-radius: 15px;
+}
+
+.content-finance{
+    background-color: var(--main-color);
+    margin: auto;
+    border-radius: 15px;
+}
+
+.content-CRM{
+    background-color: var(--main-color);
+    margin: auto;
+    border-radius: 15px;
+}
+
+.content-inventory{
+    background-color: var(--main-color);
+    margin: auto;
+    border-radius: 15px;
+}
