@@ -33,7 +33,7 @@ html{
 
 .content{
     display: flex;
-    flex-direction: row;
+    align-items: flex-start;
 }
 
 .content .side-pannel{
@@ -69,55 +69,46 @@ button:hover{
     padding: 2rem;
 }
 
-.content-dashboard{
-    display: flex;
-    justify-content: space-between
+#contentDashboard{
+    display: block;
+}
+
+.content-section {
+    display: none;
+    align-self: center;
+}
+
+table th{
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+}
+table td{
+    border-right: 1px solid;
 }
 
 .topsales{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     background-color: var(--main-color);
-    margin: 3rem;
-    padding: 1rem;
     border-radius: 10px;
-    box-shadow: 0 0 15px 1px #626262;
+    margin: 10px;
+    padding: 10px;
+    
 }
 
 .daily-revenue{
+    display: flex;
+    flex-direction: row;
     background-color: var(--main-color);
-    margin: 3rem;
-    padding: 1rem;
     border-radius: 10px;
-    box-shadow: 0 0 15px 1px #626262;
+    margin: 10px;
+    padding: 10px;
 }
 
 .business-health{
     background-color: var(--main-color);
-    margin: 3rem;
-    padding: 1rem;
     border-radius: 10px;
-    box-shadow: 0 0 15px 1px #626262;
 }
 
-.content-sales{
-    background-color: var(--main-color);
-    margin: auto;
-    border-radius: 15px;
-}
 
-.content-finance{
-    background-color: var(--main-color);
-    margin: auto;
-    border-radius: 15px;
-}
-
-.content-CRM{
-    background-color: var(--main-color);
-    margin: auto;
-    border-radius: 15px;
-}
-
-.content-inventory{
-    background-color: var(--main-color);
-    margin: auto;
-    border-radius: 15px;
-}

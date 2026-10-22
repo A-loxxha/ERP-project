@@ -25,33 +25,179 @@
             <button id="dashboardBtn">Dashboard</button>
             <button id="salesBtn">Sales Management</button>
             <button id="financeBtn">Finance and Accounts</button>
-            <button id="customerBtn">CRM</button>
+            <button id="crmBtn">CRM</button>
             <button id="inventoryBtn">Inventory Management</button>
         </div>
+
         <div class="content-wrapper">
-            <div id="contentDashboard" class="content-dashboard">
+            <div id="contentDashboard" class="content-section">
                 <div class="topsales">
                     <h1>Top Sales</h1>
+                        <table class="dashboard-table">
+                            <thead>
+                                <th>Product</th>
+                                <th>Units Sold</th>
+                                <th>Revenue</th>
+                            </thead>
+                            <tbody>
+                                <td>name</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tbody>
+                        </table>
                 </div>
                 <div class="daily-revenue">
                     <h1>Daily Revenue</h1>
                 </div>
                 <div class="business-health">
                     <h1>Business health</h1>
+                <ul>
+                    <li>Gross Profit Margin -</li>
+                    <li>Cash Balance -</li>
+                    <li>Receivables -</li>
+                    <li>Payables -</li>
+                    <li>Inventory Value -</li>
+                </ul>
                 </div>
             </div>
-            <div class="content-sales">
+
+        <div id="contentSales" class="content-section">
                 <h1>Sales</h1>
+                <button>New Orders</button>
+                <div class="toolbar">
+                    <input type="text" placeholder="Search Orders or Customer">
+                    <select>
+                        <option value="">All</option>
+                        <option>Pending</option>
+                        <option>Paid</option>
+                        <option>Delivered</option>
+                        <option>Cancelled</option>
+                    </select>
+                    <input type="date">
+                </div>
+                <div class="sales-table">
+                <table>
+                    <thead>
+                        <th>Orders</th>
+                        <th>Pending Orders</th>
+                        <th>Completed Orders</th>
+                    </thead>
+                    <tbody>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tbody>
+                </table>
+                <table class="data-table">
+                    <thead>
+                        <th>Order No</th><th>Customer</th><th>Date</th>
+                        <th>Total</th><th>Payment</th><th>Status</th><th>Actions</th>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                </div>
             </div>
-            <div class="content-finance">
+
+        <div id="contentFinance" class="content-section">
                 <h1>Finance and Accounts</h1>
+                <div class="finance-table">
+                    <table>
+                        <thead>
+                            <th>Total Income</th>
+                            <th>Total Expenses</th>
+                            <th>Net Profit</th>
+                        </thead>
+                        <tbody>
+                            <td>Ksh 0</td>
+                            <td>Ksh 0</td>
+                            <td>Ksh 0</td>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="finance-content">
+                    <h2>Invoices</h2>
+                    <button>New Invoice</button>
+                
+                <table class="invoice-table">
+                    <thead>
+                            <th>Invoice No</th>
+                            <th>Customer</th>
+                            <th>Date Issued</th>
+                            <th>Due Date</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                    </thead>
+                    <tbody>
+                        <td></td>
+                    </tbody>
+                </table>
+                </div>
+
+                <div class="finance-content">
+                    <h2>Expenses</h2>
+                    <button>Add Expense</button>
+                    <table class="expense-table">
+                    <thead>
+                            <th>Expense no</th>
+                            <th>Description</th>
+                            <th>Paid To</th>
+                            <th>Amount</th>
+                            <th>Due Date</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                    </thead>
+                    <tbody>
+                        <td></td>
+                    </tbody>
+                </table>
+                </div>
+                <div class="finance-content">
+                    <h2>Tax</h2>
+                </div>
             </div>
-            <div class="content-CRM">
+        <div id="contentCRM" class="content-section">
                 <h1>Customer Relationship Management</h1>
+                <div class="CRM-content">
+                    <h2>Customers</h2>
+                    <button>Add Customer</button>
+                    <table class="customer-table">
+                        <thead>
+                            <thead>Total Customers</thead>
+                        </thead>
+                        <tbody>
+                            <td>0</td>
+                        </tbody>
+                    </table>
+                <div class="toolbar">
+                    <input type="text" placeholder="Search by name, phone or email">
+                    <select>
+                        <option value="">All</option>
+                        <option>New</option>
+                        <option>Regular</option>
+                        <option>Important</option>
+                    </select>
+                </div>
+                    <table class="data-table">
+                    <thead>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Total Spent</th>
+                        <th>Last Order</th>
+                        <th>Actions</th>
+                    </thead>
+                    <tbody>
+                        <td></td>
+                    </tbody>
+                </table>
+
+                </div>
             </div>
-            <div class="content-inventory">
+
+        <div id="contentInventory" class="content-section">
                 <h1>Inventory Management</h1>
-            </div>
+
+        </div>
         </div>
     </section>
     <script src="/js/index.js"></script>
