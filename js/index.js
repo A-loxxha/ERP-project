@@ -46,12 +46,19 @@ inventoryBtn.addEventListener("click", ()=>{
     inventory.style.display = "block";
 });
 
-const dashAPI = "https://a-loxxha.github.io/ERP-project/db.json";
+const databaseUrl = "https://a-loxxha.github.io/ERP-project/db.json";
+let database = {};
+
+async function loadDatabase() {
+  const response = await fetch(databaseUrl);
+  database = await response.json()
+}
+
 
 async function loadDashboard() {
-  const products = await (await fetch(`${dashAPI}/topProducts`)).json();
-  const daily = await (await fetch(`${dashAPI}/dailyRevenue`)).json();
-  const health = await (await fetch(`${dashAPI}/businessHealth`)).json();
+  const products = database.topProducts;
+  const daily = database.dailyRevenue;
+  const health = database.businessHealth;
 
 
   const topBody = document.getElementById("topSalesBody");
@@ -90,8 +97,6 @@ loadDashboard();
 
 const tableBody = document.querySelector("#salesTable tbody");
 
-
-const API = "https://a-loxxha.github.io/ERP-project/db.json/orders";
 
 async function loadOrders() {
   const response = await fetch(API);
@@ -181,7 +186,6 @@ async function loadFinance() {
 loadFinance();
 
 
-const customerAPI = "https://A-loxxha.github.io/ERP-project/db.json/customers";
 
 async function loadCustomers() {
   const response = await fetch(customerAPI);
