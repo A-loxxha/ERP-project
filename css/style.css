@@ -1,5 +1,5 @@
 :root{
-    --main-color: #b1afaf;
+    --main-color: #b1afaf3c;
     --sec-color: rgba(255, 255, 255, 0.632);
     --hover-color:#ffffff;
 }
@@ -9,8 +9,9 @@ h1{
 }
 
 html{
-    background: url(/assets/abstract-gray-background_1134661-13175.avif);
+    background: url(../assets/pexels-scottwebb-593158.jpg);
     background-size: cover;
+    
 }
 
 button{
@@ -130,4 +131,17 @@ table td{
     border-radius: 10px;
 }
 
-
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(42, 42, 42, 0.955);
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  z-index: 1000;
+  padding: 10px;
+}
+.modal-overlay.open {
+  display: flex;
+}
