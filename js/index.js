@@ -65,11 +65,11 @@ async function loadDashboard() {
   topBody.innerHTML = "";
   products.forEach((product) => {
     topBody.innerHTML += 
-    ` <tr>
+    `
         <td>${product.product}</td>
         <td>${product.unitsSold}</td>
         <td>Ksh ${product.revenue}</td>
-      </tr>
+      
     `;
   });
 
@@ -78,10 +78,8 @@ async function loadDashboard() {
   dailyBody.innerHTML = "";
   daily.forEach((day) => {
     dailyBody.innerHTML += `
-      <tr>
         <td>${day.date}</td>
         <td>Ksh ${day.revenue}</td>
-      </tr>
     `;
   });
 
@@ -91,8 +89,6 @@ async function loadDashboard() {
   document.getElementById("payables").textContent = `Ksh ${health.payables}`;
   document.getElementById("inventoryValue").textContent = `Ksh ${health.inventoryValue}`;
 }
-
-loadDashboard();
 
 
 const tableBody = document.querySelector("#salesTable tbody");
@@ -107,7 +103,6 @@ async function loadOrders() {
 
   orders.forEach((order) => {
     tableBody.innerHTML += `
-      <tr>
         <td>${order.id}</td>
         <td>${order.customer}</td>
         <td>${order.date}</td>
@@ -115,7 +110,6 @@ async function loadOrders() {
         <td>${order.payment}</td>
         <td>${order.status}</td>
         <td><button onclick="deleteOrder(${order.id})">Delete</button></td>
-      </tr>
     `
   });
   document.getElementById("totalOrders").textContent = orders.length;
@@ -130,7 +124,6 @@ async function deleteOrder(id) {
   loadOrders();
 }
 
-loadOrders();
 
 
 async function loadFinance() {
@@ -142,15 +135,12 @@ async function loadFinance() {
   invoiceBody.innerHTML = "";
   invoices.forEach((inv) => {
     invoiceBody.innerHTML += `
-      <tr>
         <td>${inv.id}</td>
         <td>${inv.customer}</td>
         <td>${inv.issued}</td>
         <td>${inv.due}</td>
         <td>Ksh ${inv.amount}</td>
-        <td>${inv.status}</td>
-      </tr>
-    `
+        <td>${inv.status}</td> `
   });
 
 
@@ -158,16 +148,13 @@ async function loadFinance() {
   expenseBody.innerHTML = "";
   expenses.forEach((exp) => {
     expenseBody.innerHTML += `
-      <tr>
         <td>${exp.id}</td>
         <td>${exp.description}</td>
         <td>${exp.paidTo}</td>
         <td>Ksh ${exp.amount}</td>
         <td>${exp.due}</td>
         <td>${exp.date}</td>
-        <td>${exp.status}</td>
-      </tr>
-    `
+        <td>${exp.status}</td>`
   });
 
   
@@ -181,7 +168,6 @@ async function loadFinance() {
   document.getElementById("netProfit").textContent = `Ksh ${income - spent}`;
 };
 
-loadFinance();
 
 
 
@@ -194,14 +180,12 @@ async function loadCustomers() {
 
   customers.forEach((customer) => {
     tableBody.innerHTML += `
-      <tr>
         <td>${customer.name}</td>
         <td>${customer.phone}</td>
         <td>${customer.email}</td>
         <td>Ksh ${customer.totalSpent}</td>
         <td>${customer.lastOrder}</td>
         <td><button onclick="deleteCustomer(${customer.id})">Delete</button></td>
-      </tr>
     `;
   });
 
@@ -213,7 +197,7 @@ async function deleteCustomer(id) {
     { method: "DELETE" });
   loadCustomers();
 };
-loadCustomers();
+
 
 
 const VAT = 0.16;
@@ -258,7 +242,7 @@ function showTaxes(profit) {
 
     <td>VAT</td><td>Ksh ${profit}</td><td>${VAT * 100}%</td><td>Ksh ${vatAmount}</td>
     <td>Income Tax</td><td>Ksh ${profit}</td><td>${incomeTaxRate * 100}%</td><td>Ksh ${incomeTaxAmount}</td>
-    <td>Total</td><td></td><td></td><td>Ksh ${total}</td></tr>`;
+    <td>Total</td><td></td><td></td><td>Ksh ${total}</td>`;
 }
 
 
@@ -270,7 +254,6 @@ async function loadFilings() {
 
   filings.forEach((filing) => {
     filingsBody.innerHTML += `
-      <tr>
         <td>TX-${filing.id}</td>
         <td>${filing.period}</td>
         <td>${filing.dateFiled}</td>
@@ -278,7 +261,6 @@ async function loadFilings() {
         <td>Ksh ${filing.incomeTax}</td>
         <td>Ksh ${filing.total}</td>
         <td>${filing.status}</td>
-      </tr>
     `;
   });
 }
@@ -312,8 +294,6 @@ async function fileTax() {
 
 document.getElementById("fileTaxBtn").addEventListener("click", fileTax);
 
-calculateTaxes();
-loadFilings();
 
 
 const todayDate = () => new Date().toISOString().slice(0, 10);
@@ -462,3 +442,15 @@ document.getElementById("newExpenseBtn").addEventListener("click", ()=>{
 
 document.getElementById("newCustomerBtn").addEventListener("click", ()=>{
   openModal("customer")});
+
+  async function init() {
+   await loadDatabase();
+    loadDashboard();
+    loadOrders();
+    loadFinance();
+    loadCustomers();
+   calculateTaxes();
+    loadFilings();
+}
+
+init();
