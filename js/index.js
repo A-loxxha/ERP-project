@@ -46,7 +46,7 @@ inventoryBtn.addEventListener("click", ()=>{
     inventory.style.display = "block";
 });
 
-const dashAPI = "http://localhost:3000";
+const dashAPI = "https://a-loxxha.github.io/ERP-project/db.json";
 
 async function loadDashboard() {
   const products = await (await fetch(`${dashAPI}/topProducts`)).json();
