@@ -376,11 +376,11 @@ const modalFields = document.getElementById("modalFields");
 
 let currentForm = null;
 
-function openModal(key) {
-  currentForm = modalForms[key];
+function openModal(mod){
+  currentForm = modalForms[mod] 
   modalTitle.textContent = currentForm.title;
   modalFields.innerHTML = "";
-
+  
   currentForm.fields.forEach((field) => {
     const label = document.createElement("label");
     label.textContent = field.label;
@@ -421,7 +421,9 @@ function closeModal() {
 modalForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  const data = {};
+  const data = {}
+
+  
   currentForm.fields.forEach((field) => {
     const value = modalForm.elements[field.name].value;
     data[field.name] = field.type === "number" ? Number(value) : value;
@@ -448,14 +450,14 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") closeModal();
 });
 
-document.getElementById("newOrderBtn").addEventListener("click", ()=>
-   openModal("order"));
+document.getElementById("newOrderBtn").addEventListener("click", ()=>{
+   openModal("order")});
 
-document.getElementById("newInvoiceBtn").addEventListener("click", ()=>
-  openModal("invoice"));
+document.getElementById("newInvoiceBtn").addEventListener("click", ()=>{
+  openModal("invoice")});
 
-document.getElementById("newExpenseBtn").addEventListener("click", ()=>
-  openModal("expense"));
+document.getElementById("newExpenseBtn").addEventListener("click", ()=>{
+  openModal("expense")});
 
-document.getElementById("newCustomerBtn").addEventListener("click", ()=>
-  openModal("customer"));
+document.getElementById("newCustomerBtn").addEventListener("click", ()=>{
+  openModal("customer")});
