@@ -91,7 +91,7 @@ loadDashboard();
 const tableBody = document.querySelector("#salesTable tbody");
 
 
-const API = "https://a-loxxha.github.io/ERP-project//orders";
+const API = "https://a-loxxha.github.io/ERP-project/db.json/orders";
 
 async function loadOrders() {
   const response = await fetch(API);
@@ -127,8 +127,8 @@ async function deleteOrder(id) {
 
 loadOrders();
 
-const invoiceAPI = "https://a-loxxha.github.io/ERP-project//invoices";
-const expenseAPI = "https://a-loxxha.github.io/ERP-project/";
+const invoiceAPI = "https://a-loxxha.github.io/ERP-project/db.json/invoices";
+const expenseAPI = "https://a-loxxha.github.io/ERP-project/db.json/expense";
 
 async function loadFinance() {
   const invoices = await (await fetch(invoiceAPI)).json();
@@ -181,7 +181,7 @@ async function loadFinance() {
 loadFinance();
 
 
-const customerAPI = "https://a-loxxha.github.io/ERP-project//customers";
+const customerAPI = "https://a-loxxha.github.io/ERP-project/db.json/customers";
 
 async function loadCustomers() {
   const response = await fetch(customerAPI);
@@ -214,7 +214,7 @@ async function deleteCustomer(id) {
 loadCustomers();
 
 
-const taxAPI = "https://a-loxxha.github.io/ERP-project//taxFilings";
+const taxAPI = "https://a-loxxha.github.io/ERP-project/db.json/taxFilings";
 const VAT = 0.16;
 const incomeTaxRate = 0.30;
 
