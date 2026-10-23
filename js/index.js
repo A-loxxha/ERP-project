@@ -91,7 +91,7 @@ loadDashboard();
 const tableBody = document.querySelector("#salesTable tbody");
 
 
-const API = "http://localhost:3000/orders";
+const API = "https://a-loxxha.github.io/ERP-project//orders";
 
 async function loadOrders() {
   const response = await fetch(API);
@@ -127,8 +127,8 @@ async function deleteOrder(id) {
 
 loadOrders();
 
-const invoiceAPI = "http://localhost:3000/invoices";
-const expenseAPI = "http://localhost:3000/expenses";
+const invoiceAPI = "https://a-loxxha.github.io/ERP-project//invoices";
+const expenseAPI = "https://a-loxxha.github.io/ERP-project/";
 
 async function loadFinance() {
   const invoices = await (await fetch(invoiceAPI)).json();
@@ -180,40 +180,8 @@ async function loadFinance() {
 
 loadFinance();
 
-const CUSTOMERS_API = "http://localhost:3000/customers";
 
-async function loadCustomers() {
-  const response = await fetch(CUSTOMERS_API);
-  const customers = await response.json();
-
-  const tableBody = document.querySelector("#customerTable tbody");
-  tableBody.innerHTML = "";
-
-  customers.forEach((c) => {
-    tableBody.innerHTML += `
-      <tr>
-        <td>${c.name}</td>
-        <td>${c.phone}</td>
-        <td>${c.email}</td>
-        <td>Ksh ${c.totalSpent}</td>
-        <td>${c.lastOrder}</td>
-        <td><button onclick="deleteCustomer(${c.id})">Delete</button></td>
-      </tr>
-    `
-  });
-
-  document.getElementById("totalCustomers").textContent = customers.length;
-}
-
-async function deleteCustomer(id) {
-  await fetch(`${CUSTOMERS_API}/${id}`, 
-    { method: "DELETE" });
-  loadCustomers();
-};
-
-loadCustomers();
-
-const customerAPI = "http://localhost:3000/customers";
+const customerAPI = "https://a-loxxha.github.io/ERP-project//customers";
 
 async function loadCustomers() {
   const response = await fetch(customerAPI);
@@ -246,9 +214,9 @@ async function deleteCustomer(id) {
 loadCustomers();
 
 
-const taxAPI = "http://localhost:3000/taxFilings";
-const VAT_RATE = 0.16;
-const INCOME_TAX_RATE = 0.30;
+const taxAPI = "https://a-loxxha.github.io/ERP-project//taxFilings";
+const VAT = 0.16;
+const incomeTaxRate = 0.30;
 
 let vatAmount = 0;
 let incomeTaxAmount = 0;
@@ -272,8 +240,8 @@ async function calculateTaxes() {
   const profit = income - spent;
 
   if (profit > 0) {
-    vatAmount = Math.round(profit * VAT_RATE);
-    incomeTaxAmount = Math.round(profit * INCOME_TAX_RATE);
+    vatAmount = Math.round(profit * VAT);
+    incomeTaxAmount = Math.round(profit * incomeTaxRate);
   } else {
     vatAmount = 0;
     incomeTaxAmount = 0;
@@ -286,10 +254,10 @@ function showTaxes(profit) {
   const total = vatAmount + incomeTaxAmount;
 
   document.getElementById("taxBody").innerHTML = `
-    <tr><td>VAT</td><td>Ksh ${profit}</td><td>${VAT_RATE * 100}%</td><td>Ksh ${vatAmount}</td></tr>
-    <tr><td>Income Tax</td><td>Ksh ${profit}</td><td>${INCOME_TAX_RATE * 100}%</td><td>Ksh ${incomeTaxAmount}</td></tr>
-    <tr><td>Total</td><td></td><td></td><td>Ksh ${total}</td></tr>
-  `;
+
+    <td>VAT</td><td>Ksh ${profit}</td><td>${VAT * 100}%</td><td>Ksh ${vatAmount}</td>
+    <td>Income Tax</td><td>Ksh ${profit}</td><td>${incomeTaxRate * 100}%</td><td>Ksh ${incomeTaxAmount}</td>
+    <td>Total</td><td></td><td></td><td>Ksh ${total}</td></tr>`;
 }
 
 
@@ -480,7 +448,14 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") closeModal();
 });
 
-document.getElementById("newOrderBtn").addEventListener("click", () => openModal("order"));
-document.getElementById("newInvoiceBtn").addEventListener("click", () => openModal("invoice"));
-document.getElementById("newExpenseBtn").addEventListener("click", () => openModal("expense"));
-document.getElementById("newCustomerBtn").addEventListener("click", () => openModal("customer"));
+document.getElementById("newOrderBtn").addEventListener("click", ()=>
+   openModal("order"));
+
+document.getElementById("newInvoiceBtn").addEventListener("click", ()=>
+  openModal("invoice"));
+
+document.getElementById("newExpenseBtn").addEventListener("click", ()=>
+  openModal("expense"));
+
+document.getElementById("newCustomerBtn").addEventListener("click", ()=>
+  openModal("customer"));
