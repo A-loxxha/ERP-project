@@ -1,0 +1,187 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "title": "a title",
+      "views": 100
+    },
+    {
+      "id": "2",
+      "title": "another title",
+      "views": 200
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "text": "a comment about post 1",
+      "postId": "1"
+    },
+    {
+      "id": "2",
+      "text": "another comment about post 1",
+      "postId": "1"
+    }
+  ],
+  "topProducts": [
+    {
+      "id": "1",
+      "product": "Maize Flour 2kg",
+      "unitsSold": 120,
+      "revenue": 18000
+    },
+    {
+      "id": "2",
+      "product": "Cooking Oil 1L",
+      "unitsSold": 85,
+      "revenue": 17000
+    },
+    {
+      "id": "3",
+      "product": "Sugar 1kg",
+      "unitsSold": 60,
+      "revenue": 9000
+    }
+  ],
+  "dailyRevenue": [
+    {
+      "id": "1",
+      "date": "20-10-2026",
+      "revenue": 4500
+    },
+    {
+      "id": "2",
+      "date": "21-10-2026",
+      "revenue": 1200
+    },
+    {
+      "id": "3",
+      "date": "22-10-2026",
+      "revenue": 8900
+    }
+  ],
+  "businessHealth": {
+    "grossMargin": 35,
+    "cashBalance": 52000,
+    "receivables": 1200,
+    "payables": 500,
+    "inventoryValue": 90000
+  },
+  "orders": [
+    {
+      "id": "1",
+      "customer": "Jane Wambui",
+      "date": "20-10-2026",
+      "total": 4500,
+      "payment": "Paid",
+      "status": "Delivered"
+    },
+    {
+      "id": "2",
+      "customer": "Brian Otieno",
+      "date": "21-10-2026",
+      "total": 1200,
+      "payment": "Unpaid",
+      "status": "Pending"
+    },
+    {
+      "id": "3",
+      "customer": "Winnie Wanjiku",
+      "date": "22-10-2026",
+      "total": 8900,
+      "payment": "Paid",
+      "status": "Paid"
+    }
+  ],
+  "invoices": [
+    {
+      "id": "1",
+      "customer": "Jane Wambui",
+      "issued": "01-10-2026",
+      "due": "15-10-2026",
+      "amount": 4500,
+      "status": "Paid"
+    },
+    {
+      "id": "2",
+      "customer": "Brian Otieno",
+      "issued": "10-10-2026",
+      "due": "25-10-2026",
+      "amount": 1200,
+      "status": "Unpaid"
+    }
+  ],
+  "expenses": [
+    {
+      "id": "1",
+      "description": "Office rent",
+      "paidTo": "Landlord",
+      "amount": 2000,
+      "due": "2026-10-05",
+      "date": "2026-10-04",
+      "status": "Paid"
+    },
+    {
+      "id": "2",
+      "description": "Internet",
+      "paidTo": "Safaricom",
+      "amount": 500,
+      "due": "2026-10-28",
+      "date": "2026-10-20",
+      "status": "Pending"
+    }
+  ],
+  "taxFilings": [
+    {
+      "period": "2026-10",
+      "dateFiled": "2026-10-22T21:36:26.039Z",
+      "vat": 320,
+      "incomeTax": 600,
+      "total": 920,
+      "status": "Filed",
+      "id": "VNHi5uMVtU4"
+    },
+    {
+      "period": "2026-10",
+      "dateFiled": "2026-10-22T22:12:18.804Z",
+      "vat": 320,
+      "incomeTax": 600,
+      "total": 920,
+      "status": "Filed",
+      "id": "VeOiZ9_-I_M"
+    }
+  ],
+  "customers": [
+    {
+      "id": "1",
+      "name": "Jane Wambui",
+      "phone": "0712345678",
+      "email": "jane@gmail.com",
+      "totalSpent": 4500,
+      "lastOrder": "2026-10-20",
+      "type": "Regular"
+    },
+    {
+      "id": "2",
+      "name": "Brian Otieno",
+      "phone": "0723456789",
+      "email": "brian@gmail.com",
+      "totalSpent": 1200,
+      "lastOrder": "2026-10-21",
+      "type": "New"
+    },
+    {
+      "id": "3",
+      "name": "Winnie Wanjiku",
+      "phone": "0734567890",
+      "email": "winnie@gmail.com",
+      "totalSpent": 8900,
+      "lastOrder": "2026-10-22",
+      "type": "Important"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "$schema": "./node_modules/json-server/schema.json"
+}
