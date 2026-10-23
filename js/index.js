@@ -181,7 +181,7 @@ async function loadFinance() {
 loadFinance();
 
 
-const customerAPI = "https://a-loxxha.github.io/ERP-project/db.json/customers";
+const customerAPI = "https://A-loxxha.github.io/ERP-project/db.json/customers";
 
 async function loadCustomers() {
   const response = await fetch(customerAPI);
