@@ -65,11 +65,11 @@ async function loadDashboard() {
   topBody.innerHTML = "";
   products.forEach((product) => {
     topBody.innerHTML += 
-    `
+    `   <tr>
         <td>${product.product}</td>
         <td>${product.unitsSold}</td>
         <td>Ksh ${product.revenue}</td>
-      
+      </tr>
     `;
   });
 
@@ -78,8 +78,10 @@ async function loadDashboard() {
   dailyBody.innerHTML = "";
   daily.forEach((day) => {
     dailyBody.innerHTML += `
+    <tr>
         <td>${day.date}</td>
         <td>Ksh ${day.revenue}</td>
+        </tr>
     `;
   });
 
@@ -103,6 +105,7 @@ async function loadOrders() {
 
   orders.forEach((order) => {
     tableBody.innerHTML += `
+    <tr>
         <td>${order.id}</td>
         <td>${order.customer}</td>
         <td>${order.date}</td>
@@ -110,6 +113,7 @@ async function loadOrders() {
         <td>${order.payment}</td>
         <td>${order.status}</td>
         <td><button onclick="deleteOrder(${order.id})">Delete</button></td>
+      </tr>
     `
   });
   document.getElementById("totalOrders").textContent = orders.length;
@@ -135,12 +139,14 @@ async function loadFinance() {
   invoiceBody.innerHTML = "";
   invoices.forEach((inv) => {
     invoiceBody.innerHTML += `
+    <tr>
         <td>${inv.id}</td>
         <td>${inv.customer}</td>
         <td>${inv.issued}</td>
         <td>${inv.due}</td>
         <td>Ksh ${inv.amount}</td>
-        <td>${inv.status}</td> `
+        <td>${inv.status}</td> 
+        </tr>`
   });
 
 
@@ -148,13 +154,16 @@ async function loadFinance() {
   expenseBody.innerHTML = "";
   expenses.forEach((exp) => {
     expenseBody.innerHTML += `
+    <tr>
         <td>${exp.id}</td>
         <td>${exp.description}</td>
         <td>${exp.paidTo}</td>
         <td>Ksh ${exp.amount}</td>
         <td>${exp.due}</td>
         <td>${exp.date}</td>
-        <td>${exp.status}</td>`
+        <td>${exp.status}</td>
+      </tr>`
+        
   });
 
   
@@ -180,12 +189,13 @@ async function loadCustomers() {
 
   customers.forEach((customer) => {
     tableBody.innerHTML += `
-        <td>${customer.name}</td>
+       <tr> <td>${customer.name}</td>
         <td>${customer.phone}</td>
         <td>${customer.email}</td>
         <td>Ksh ${customer.totalSpent}</td>
         <td>${customer.lastOrder}</td>
         <td><button onclick="deleteCustomer(${customer.id})">Delete</button></td>
+      </tr>
     `;
   });
 
@@ -254,6 +264,7 @@ async function loadFilings() {
 
   filings.forEach((filing) => {
     filingsBody.innerHTML += `
+    <tr>
         <td>TX-${filing.id}</td>
         <td>${filing.period}</td>
         <td>${filing.dateFiled}</td>
@@ -261,6 +272,7 @@ async function loadFilings() {
         <td>Ksh ${filing.incomeTax}</td>
         <td>Ksh ${filing.total}</td>
         <td>${filing.status}</td>
+        </tr>
     `;
   });
 }
@@ -451,6 +463,6 @@ document.getElementById("newCustomerBtn").addEventListener("click", ()=>{
     loadCustomers();
    calculateTaxes();
     loadFilings();
-}
+};
 
 init();
