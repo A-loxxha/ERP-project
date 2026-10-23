@@ -99,8 +99,8 @@ const tableBody = document.querySelector("#salesTable tbody");
 
 
 async function loadOrders() {
-  const response = await fetch(API);
-  const orders = await response.json();
+
+  const orders = database.orders;
 
   const tableBody = document.querySelector("#salesTable tbody");
   tableBody.innerHTML = "";
@@ -126,20 +126,18 @@ async function loadOrders() {
 }
 
 async function deleteOrder(id) {
-  await fetch(`${API}/${id}`, { method: "DELETE" });
+  await fetch(``, { method: "DELETE" });
   loadOrders();
 }
 
 loadOrders();
 
-const invoiceAPI = "https://a-loxxha.github.io/ERP-project/db.json/invoices";
-const expenseAPI = "https://a-loxxha.github.io/ERP-project/db.json/expense";
 
 async function loadFinance() {
-  const invoices = await (await fetch(invoiceAPI)).json();
-  const expenses = await (await fetch(expenseAPI)).json();
+  const invoices = database.invoices;
+  const expenses = database.expenses;
 
-  // Invoices table
+
   const invoiceBody = document.querySelector(".invoice-table tbody");
   invoiceBody.innerHTML = "";
   invoices.forEach((inv) => {
@@ -155,7 +153,7 @@ async function loadFinance() {
     `
   });
 
-  // Expenses table
+
   const expenseBody = document.querySelector(".expense-table tbody");
   expenseBody.innerHTML = "";
   expenses.forEach((exp) => {
@@ -188,8 +186,8 @@ loadFinance();
 
 
 async function loadCustomers() {
-  const response = await fetch(customerAPI);
-  const customers = await response.json();
+  
+  const customers = database.customers;
 
   const tableBody = document.querySelector("#customerTable tbody");
   tableBody.innerHTML = "";
@@ -218,7 +216,6 @@ async function deleteCustomer(id) {
 loadCustomers();
 
 
-const taxAPI = "https://a-loxxha.github.io/ERP-project/db.json/taxFilings";
 const VAT = 0.16;
 const incomeTaxRate = 0.30;
 
@@ -226,8 +223,8 @@ let vatAmount = 0;
 let incomeTaxAmount = 0;
 
 async function calculateTaxes() {
-  const invoices = await (await fetch(invoiceAPI)).json();
-  const expenses = await (await fetch(expenseAPI)).json();
+  const invoices = database.invoices;
+  const expenses = database.expenses;
 
   let income = 0;
   for (const invoice of invoices) {
@@ -266,7 +263,7 @@ function showTaxes(profit) {
 
 
 async function loadFilings() {
-  const filings = await (await fetch(taxAPI)).json();
+  const filings = database.taxFilings;
 
   const filingsBody = document.getElementById("filingsBody");
   filingsBody.innerHTML = "";
