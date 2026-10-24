@@ -66,6 +66,7 @@ input{
     border: none;
     letter-spacing: 2px;
 }
+
 .side-pannel{
     backdrop-filter: blur(10px);
     border-radius: 20px;
@@ -80,7 +81,7 @@ button:hover{
 .content-wrapper{
     text-align: center;
     backdrop-filter: blur(10px);
-    box-shadow: 0 0 15px 1px #777777;
+    box-shadow: 0 0 15px 1px #3e3e3e;
     border-radius: 30px;
     margin: auto;
     padding: 2rem;
