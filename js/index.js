@@ -46,26 +46,19 @@ inventoryBtn.addEventListener("click", ()=>{
     inventory.style.display = "block";
 });
 
-const databaseUrl = "https://a-loxxha.github.io/ERP-project/db.json";
-let database = {};
-
-async function loadDatabase() {
-  const response = await fetch(databaseUrl);
-  database = await response.json()
-}
-
+const dashAPI = "https://a-loxxha.github.io/ERP-project/db.json";
 
 async function loadDashboard() {
-  const products = database.topProducts;
-  const daily = database.dailyRevenue;
-  const health = database.businessHealth;
+  const products = await (await fetch(`${dashAPI}/topProducts`)).json();
+  const daily = await (await fetch(`${dashAPI}/dailyRevenue`)).json();
+  const health = await (await fetch(`${dashAPI}/businessHealth`)).json();
 
 
   const topBody = document.getElementById("topSalesBody");
   topBody.innerHTML = "";
   products.forEach((product) => {
     topBody.innerHTML += 
-    `   <tr>
+    ` <tr>
         <td>${product.product}</td>
         <td>${product.unitsSold}</td>
         <td>Ksh ${product.revenue}</td>
@@ -78,10 +71,10 @@ async function loadDashboard() {
   dailyBody.innerHTML = "";
   daily.forEach((day) => {
     dailyBody.innerHTML += `
-    <tr>
+      <tr>
         <td>${day.date}</td>
         <td>Ksh ${day.revenue}</td>
-        </tr>
+      </tr>
     `;
   });
 
@@ -92,20 +85,24 @@ async function loadDashboard() {
   document.getElementById("inventoryValue").textContent = `Ksh ${health.inventoryValue}`;
 }
 
+loadDashboard();
+
 
 const tableBody = document.querySelector("#salesTable tbody");
 
 
-async function loadOrders() {
+const API = "https://a-loxxha.github.io/ERP-project/db.json/orders";
 
-  const orders = database.orders;
+async function loadOrders() {
+  const response = await fetch(API);
+  const orders = await response.json();
 
   const tableBody = document.querySelector("#salesTable tbody");
   tableBody.innerHTML = "";
 
   orders.forEach((order) => {
     tableBody.innerHTML += `
-    <tr>
+      <tr>
         <td>${order.id}</td>
         <td>${order.customer}</td>
         <td>${order.date}</td>
@@ -124,37 +121,41 @@ async function loadOrders() {
 }
 
 async function deleteOrder(id) {
-  await fetch(``, { method: "DELETE" });
+  await fetch(`${API}/${id}`, { method: "DELETE" });
   loadOrders();
 }
 
+loadOrders();
 
+const invoiceAPI = "https://a-loxxha.github.io/ERP-project/db.json/invoices";
+const expenseAPI = "https://a-loxxha.github.io/ERP-project/db.json/expenses";
 
 async function loadFinance() {
-  const invoices = database.invoices;
-  const expenses = database.expenses;
+  const invoices = await (await fetch(invoiceAPI)).json();
+  const expenses = await (await fetch(expenseAPI)).json();
 
-
+  // Invoices table
   const invoiceBody = document.querySelector(".invoice-table tbody");
   invoiceBody.innerHTML = "";
   invoices.forEach((inv) => {
     invoiceBody.innerHTML += `
-    <tr>
+      <tr>
         <td>${inv.id}</td>
         <td>${inv.customer}</td>
         <td>${inv.issued}</td>
         <td>${inv.due}</td>
         <td>Ksh ${inv.amount}</td>
-        <td>${inv.status}</td> 
-        </tr>`
+        <td>${inv.status}</td>
+      </tr>
+    `
   });
 
-
+  // Expenses table
   const expenseBody = document.querySelector(".expense-table tbody");
   expenseBody.innerHTML = "";
   expenses.forEach((exp) => {
     expenseBody.innerHTML += `
-    <tr>
+      <tr>
         <td>${exp.id}</td>
         <td>${exp.description}</td>
         <td>${exp.paidTo}</td>
@@ -162,8 +163,8 @@ async function loadFinance() {
         <td>${exp.due}</td>
         <td>${exp.date}</td>
         <td>${exp.status}</td>
-      </tr>`
-        
+      </tr>
+    `
   });
 
   
@@ -177,19 +178,54 @@ async function loadFinance() {
   document.getElementById("netProfit").textContent = `Ksh ${income - spent}`;
 };
 
+loadFinance();
 
-
+const CUSTOMERS_API = "https://a-loxxha.github.io/ERP-project/db.json/customers";
 
 async function loadCustomers() {
-  
-  const customers = database.customers;
+  const response = await fetch(CUSTOMERS_API);
+  const customers = await response.json();
+
+  const tableBody = document.querySelector("#customerTable tbody");
+  tableBody.innerHTML = "";
+
+  customers.forEach((c) => {
+    tableBody.innerHTML += `
+      <tr>
+        <td>${c.name}</td>
+        <td>${c.phone}</td>
+        <td>${c.email}</td>
+        <td>Ksh ${c.totalSpent}</td>
+        <td>${c.lastOrder}</td>
+        <td><button onclick="deleteCustomer(${c.id})">Delete</button></td>
+      </tr>
+    `
+  });
+
+  document.getElementById("totalCustomers").textContent = customers.length;
+}
+
+async function deleteCustomer(id) {
+  await fetch(`${CUSTOMERS_API}/${id}`, 
+    { method: "DELETE" });
+  loadCustomers();
+};
+
+loadCustomers();
+
+const customerAPI = "https://a-loxxha.github.io/ERP-project/db.json/customers";
+
+async function loadCustomers() {
+  const response = await fetch(customerAPI);
+  const customers = await response.json();
 
   const tableBody = document.querySelector("#customerTable tbody");
   tableBody.innerHTML = "";
 
   customers.forEach((customer) => {
     tableBody.innerHTML += `
-       <tr> <td>${customer.name}</td>
+      <tr>
+        <td>${customer.name}</td>
         <td>${customer.phone}</td>
         <td>${customer.email}</td>
         <td>Ksh ${customer.totalSpent}</td>
@@ -207,9 +243,10 @@ async function deleteCustomer(id) {
     { method: "DELETE" });
   loadCustomers();
 };
+loadCustomers();
 
 
-
+const taxAPI = "https://a-loxxha.github.io/ERP-project/db.json/taxFilings";
 const VAT = 0.16;
 const incomeTaxRate = 0.30;
 
@@ -217,8 +254,8 @@ let vatAmount = 0;
 let incomeTaxAmount = 0;
 
 async function calculateTaxes() {
-  const invoices = database.invoices;
-  const expenses = database.expenses;
+  const invoices = await (await fetch(invoiceAPI)).json();
+  const expenses = await (await fetch(expenseAPI)).json();
 
   let income = 0;
   for (const invoice of invoices) {
@@ -249,22 +286,22 @@ function showTaxes(profit) {
   const total = vatAmount + incomeTaxAmount;
 
   document.getElementById("taxBody").innerHTML = `
-
-    <td>VAT</td><td>Ksh ${profit}</td><td>${VAT * 100}%</td><td>Ksh ${vatAmount}</td>
-    <td>Income Tax</td><td>Ksh ${profit}</td><td>${incomeTaxRate * 100}%</td><td>Ksh ${incomeTaxAmount}</td>
-    <td>Total</td><td></td><td></td><td>Ksh ${total}</td>`;
+    <tr><td>VAT</td><td>Ksh ${profit}</td><td>${VAT_RATE * 100}%</td><td>Ksh ${vatAmount}</td></tr>
+    <tr><td>Income Tax</td><td>Ksh ${profit}</td><td>${incomeTaxRate * 100}%</td><td>Ksh ${incomeTaxAmount}</td></tr>
+    <tr><td>Total</td><td></td><td></td><td>Ksh ${total}</td></tr>
+  `;
 }
 
 
 async function loadFilings() {
-  const filings = database.taxFilings;
+  const filings = await (await fetch(taxAPI)).json();
 
   const filingsBody = document.getElementById("filingsBody");
   filingsBody.innerHTML = "";
 
   filings.forEach((filing) => {
     filingsBody.innerHTML += `
-    <tr>
+      <tr>
         <td>TX-${filing.id}</td>
         <td>${filing.period}</td>
         <td>${filing.dateFiled}</td>
@@ -272,7 +309,7 @@ async function loadFilings() {
         <td>Ksh ${filing.incomeTax}</td>
         <td>Ksh ${filing.total}</td>
         <td>${filing.status}</td>
-        </tr>
+      </tr>
     `;
   });
 }
@@ -306,6 +343,8 @@ async function fileTax() {
 
 document.getElementById("fileTaxBtn").addEventListener("click", fileTax);
 
+calculateTaxes();
+loadFilings();
 
 
 const todayDate = () => new Date().toISOString().slice(0, 10);
@@ -369,11 +408,11 @@ const modalFields = document.getElementById("modalFields");
 
 let currentForm = null;
 
-function openModal(mod){
-  currentForm = modalForms[mod] 
+function openModal(key) {
+  currentForm = modalForms[key];
   modalTitle.textContent = currentForm.title;
   modalFields.innerHTML = "";
-  
+
   currentForm.fields.forEach((field) => {
     const label = document.createElement("label");
     label.textContent = field.label;
@@ -414,9 +453,7 @@ function closeModal() {
 modalForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  const data = {}
-
-  
+  const data = {};
   currentForm.fields.forEach((field) => {
     const value = modalForm.elements[field.name].value;
     data[field.name] = field.type === "number" ? Number(value) : value;
@@ -443,26 +480,7 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") closeModal();
 });
 
-document.getElementById("newOrderBtn").addEventListener("click", ()=>{
-   openModal("order")});
-
-document.getElementById("newInvoiceBtn").addEventListener("click", ()=>{
-  openModal("invoice")});
-
-document.getElementById("newExpenseBtn").addEventListener("click", ()=>{
-  openModal("expense")});
-
-document.getElementById("newCustomerBtn").addEventListener("click", ()=>{
-  openModal("customer")});
-
-  async function init() {
-   await loadDatabase();
-    loadDashboard();
-    loadOrders();
-    loadFinance();
-    loadCustomers();
-   calculateTaxes();
-    loadFilings();
-};
-
-init();
+document.getElementById("newOrderBtn").addEventListener("click", () => openModal("order"));
+document.getElementById("newInvoiceBtn").addEventListener("click", () => openModal("invoice"));
+document.getElementById("newExpenseBtn").addEventListener("click", () => openModal("expense"));
+document.getElementById("newCustomerBtn").addEventListener("click", () => openModal("customer"));
